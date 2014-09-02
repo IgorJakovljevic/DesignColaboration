@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DesignTeamApp</title>
+  <title><%=@title%></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<ul class="nav nav-pills" >
+  <li ><%= link_to "Home", "/" %></li>
+  <li ><%= link_to "Sign Up", "signup" %></li>
+</ul>
 
 <%= yield %>
 
+<%= debug(params) if Rails.env.development? %>
 </body>
 </html>

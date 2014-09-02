@@ -22,7 +22,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
@@ -39,10 +40,10 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 group :development do
-gem 'rspec-rails', '2.0.1'
+gem 'rspec-rails'
 end
 
 group :test do
-gem 'rspec', '2.0.1'
+gem 'rspec'
 gem 'webrat', '0.7.1'
 end
