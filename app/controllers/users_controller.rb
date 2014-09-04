@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :authenticate, :only => [:index, :edit, :update]
+
+  def index
+    @title = "All users"
+    @users = User.paginate(:page => params[:page])
+  end
 
   def new
   	@user = User.new
@@ -9,6 +14,7 @@ class UsersController < ApplicationController
   def create
 	@user = User.new(user_params)
 	if @user.save
+    
     sign_in @user
 		flash[:success] = "You have signed up"
 		redirect_to root_path
@@ -39,12 +45,27 @@ class UsersController < ApplicationController
   end
 
   def show
+
   	@user = User.find(params[:id])
+    @title = @user.firstname+" "+ @user.lastname
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User destroyed"
+    redirect_to users_path
   end
 
   private
+
   def authenticate
-  deny_access unless signed_in?
+    deny_access unless signed_in?
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+
   end
 
 end

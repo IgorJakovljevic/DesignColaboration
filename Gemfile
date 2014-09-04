@@ -5,7 +5,10 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+# Use gravatar for profile images
 gem 'gravatar_image_tag', '0.1.0'
+# Use will_paginate for pagination
+gem'will_paginate'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,10 +44,11 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 group :development do
-gem 'rspec-rails'
+	gem 'rspec-rails'
+	gem 'faker'
 end
 
 group :test do
-gem 'rspec'
-gem 'webrat', '0.7.1'
+	gem 'rspec'
+	gem 'webrat', '0.7.1'
 end
