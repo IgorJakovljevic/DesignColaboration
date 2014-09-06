@@ -7,11 +7,13 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to(root_path) unless !signed_in?
   	@user = User.new
-	@title = "Sign Up"
+	  @title = "Sign Up"
   end
 
   def create
+  redirect_to(root_path) unless !signed_in?
 	@user = User.new(user_params)
 	if @user.save
     
@@ -26,6 +28,9 @@ class UsersController < ApplicationController
 
   def user_params
       params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+  end
+  def micropost_params
+        params.require(:micropost).permit(:contet)
   end
 
   def update
@@ -47,13 +52,19 @@ class UsersController < ApplicationController
   def show
 
   	@user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.firstname+" "+ @user.lastname
   end
 
   def destroy
+    if current_user?(User.find(params[:id]))
+      flash[:notice] = "You can't delete yourself."
+      redirect_to users_path
+    else
     User.find(params[:id]).destroy
-    flash[:success] = "User destroyed"
+    flash[:success] = "User deleted"
     redirect_to users_path
+    end
   end
 
   private
