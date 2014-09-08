@@ -1,0 +1,39 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+  <%= @project.users.count%>
+</p>
+
+
+
+
+
+
+  <% if @users != nil%>
+	<table>
+
+		<% @users.each do |user| %>
+	      <tr>
+	        <td><%= user.firstname + " " + user.lastname %></td>
+
+	        <% if current_user.admin? %>
+	        
+	        <td><%= link_to "Add to project", "addtoproject/#{user.id}/#{@project.id}"    %></td>
+	        
+	        <% end %>
+
+	      </tr>
+
+	  <% end %>	
+	  </table>
+	  <br>
+	  <%= will_paginate @users %>
+
+  <% else %>
+  	<strong>0</strong>
+  <% end %>
+
+<br>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

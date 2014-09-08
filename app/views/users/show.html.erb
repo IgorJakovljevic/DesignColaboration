@@ -17,12 +17,31 @@
 
 </table>
 
-
+	
+		<table class="front" summary="For signed-in users">
+			<tr>
+				<td class="main">
+					<h1 class="micropost">What's up?</h1>
+					<%= render 'shared/micropost_form' %>			
+			</tr>
+		</table>
+	
 
 	<% unless @user.microposts.empty? %>
 	<%= will_paginate @microposts %>
 	<table class="microposts" summary="User microposts">
 		<%= render @microposts %>
 	</table>
-	<%= will_paginate %>
+	<%= will_paginate @microposts %>
 	<% end %>
+
+
+	<br>
+		<strong>Project Name</strong> <%= @user.projects.count %>
+	<br>
+
+<table>
+<% @user.projects.each do |project| %>
+	<tr><%= project.name %></tr>
+<% end %>
+</table>

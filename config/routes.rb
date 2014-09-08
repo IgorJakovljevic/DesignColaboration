@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
+  
+  resources :tasks
+
   get 'sessions/new'
 
   resources :users
+  resources :projects
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :microposts, :only => [:create, :destroy]
 
   get 'signup', :to => 'users#new'
 
   get '/signin', :to => 'sessions#new'
   delete '/signout', :to => 'sessions#destroy'
+
+  get 'projects/addtoproject/:id/:pid' => 'projects#AddUser'
 
   root 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

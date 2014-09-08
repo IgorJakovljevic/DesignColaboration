@@ -11,16 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904124506) do
+ActiveRecord::Schema.define(version: 20140908210000) do
 
   create_table "microposts", force: true do |t|
-    t.string   "contet"
+    t.string   "content"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects_users", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "firstname"
@@ -31,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140904124506) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              default: false
+    t.integer  "project_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

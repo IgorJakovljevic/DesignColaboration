@@ -36,6 +36,25 @@ module SessionsHelper
 		clear_return_to
 	end
 
+	def authenticate
+    	deny_access unless signed_in?
+  	end
+
+	def deny_access
+	    store_location
+	    redirect_to signin_path, :notice => "Please sign in to access this page."
+	end
+
+	def user_is_admin
+      deny_access_admin unless current_user.admin?
+    end
+
+	def deny_access_admin
+		store_location
+	    redirect_to root_path, :notice => "Only admin users can do this."
+	end
+
+
 	private
 
 	def user_from_remember_token

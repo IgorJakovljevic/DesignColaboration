@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @title = "All users"
     @users = User.paginate(:page => params[:page])
   end
+ def AddUser
+    redirect_to "http://google.ba"
+  end
+
 
   def new
     redirect_to(root_path) unless !signed_in?
@@ -27,10 +31,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-      params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+      params.require(:user).permit(:firstname, :lastname, :email, :password ,:password_confirmation, :admin, :project_id)
   end
   def micropost_params
-        params.require(:micropost).permit(:contet)
+        params.require(:micropost).permit(:content)
   end
 
   def update
@@ -50,7 +54,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @micropost = Micropost.new 
   	@user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.firstname+" "+ @user.lastname
@@ -65,18 +69,6 @@ class UsersController < ApplicationController
     flash[:success] = "User deleted"
     redirect_to users_path
     end
-  end
-
-  private
-
-  def authenticate
-    deny_access unless signed_in?
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)
-
   end
 
 end
