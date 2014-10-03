@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :jobs
+
   resources :tasks
 
   get 'sessions/new'

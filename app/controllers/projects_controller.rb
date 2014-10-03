@@ -15,9 +15,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   # GET /projects/1.json
-  def show
-     @users = User.all.paginate(:page => params[:page],per_page: 5)
-
+  def show       
+     @users = User.where(:project_id != params[:id]).paginate(:page => params[:page],per_page: 5)
   end
 
   # GET /projects/new

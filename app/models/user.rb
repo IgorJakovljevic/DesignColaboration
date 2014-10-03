@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :projects
 	has_many :microposts
 	has_many :tasks
+	has_many :jobs
 	attr_accessor :password
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
