@@ -45,3 +45,11 @@
 	<tr><%= project.name %></tr>
 <% end %>
 </table>
+
+<br>
+
+<table>
+<% @user.tasks.each do |task| %>
+	<tr><td><%= task.name %></td><td><%= task.description%></td></tr>
+<% end %>
+</table>

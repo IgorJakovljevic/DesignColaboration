@@ -3,12 +3,16 @@ class CreateJobs < ActiveRecord::Migration
     create_table :jobs do |t|
       t.string :name
       t.integer :rate
+      t.belongs_to :user
+      t.belongs_to :task
 
       t.timestamps
     end
+
+    add_column :microposts, :job_id, :integer
   end
 
   def self.down
-  	remove_table :jobs
+  	drop_table :jobs
   end
 end

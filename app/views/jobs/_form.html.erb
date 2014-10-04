@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :Task %><br>
-    <%= f.collection_select :id, @tasks, :id, "#{:name }", include_blank: true %>
+    <%= f.collection_select :id, @tasks, :id1, "#{:name }", include_blank: true %>
   </div>
   <div class="field">
     <%= f.label :User %><br>
-    <%= f.collection_select :id, @users, :id, :fullname, include_blank: true %>
+    <%= f.collection_select :id, @users, :id2, :fullname, include_blank: true %>
   </div>
   <div class="actions">
     <%= f.submit %>
